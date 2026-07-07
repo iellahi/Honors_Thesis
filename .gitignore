@@ -17,3 +17,5 @@ numerics/task2_frontier_grid.csv
 *.log
 *.out
 *.synctex.gz
+
+README_detailed.md
