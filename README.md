@@ -5,7 +5,7 @@ result and checked it against an independent solve of the model, to make sure th
 holds up.
 
 **Short version: it all holds. 0 violations across 60,000 parameter draws.** A handful of edge cases
-tripped the finite-difference check, but those turned out to be numerical artifacts — I re-ran them at
+tripped the finite-difference check, but those turned out to be numerical artifacts; I re-ran them at
 50-digit precision and they're clean.
 
 ## The model
