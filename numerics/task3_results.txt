@@ -1,0 +1,25 @@
+==========================================================================
+PART A: (0,0) closure over the full system  (seed 11, N=60000)
+==========================================================================
+converged draws: 60000   (skipped non-converged asym: 0)
+  analytic Delta0>0 region (m<1/2 or b0>=4/5): 46835   numerical-only: 13165
+
+[Delta0 > 0]     violations = 0      min Delta0 (all)        = 2.134626e-02
+                                   min Delta0 (numerical-only) = 2.134626e-02
+[x00* in (0,1)]  violations = 0      range x00* = [8.168646e-07, 0.369933]
+[m x00* < 1]     violations = 0      max m x00* = 0.183601
+[quadratic residual at x00*] max = 2.843e-13
+(memory reference: min Delta0 ~ 2.1e-2, zero violations)
+
+==========================================================================
+PART B: Prop 3 consistency -- exact identity & m x00* < 1-b0 frequency
+        (seed 31, N=30000; expect m x00* < 1-b0 to hold 100% under A2')
+==========================================================================
+m x00* < 1-b0 :  holds 30000, fails 0  (0.000% -> should be 0 if unconditional)
+max |F00((1-b0)/m) - identity|  = 4.547e-13   (identity verified)
+max F00((1-b0)/m) over scan     = -1.480790e-04   (must be < 0)
+=> CONFIRMED: at the subtracted root m x00* < 1-b0 ALWAYS, so F00_{V10} > 0
+   unconditionally (matches finalized Prop 3; not merely the raw partial).
+
+violations written: 0  (see numerics/task3_violations.csv)
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/thesis/figs/task3_00_diagnostics.png

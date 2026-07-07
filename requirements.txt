@@ -1,0 +1,5 @@
+# Numerical validation dependencies (Python 3.10+). No SciPy required.
+numpy>=1.24
+matplotlib>=3.7
+sympy>=1.12
+mpmath>=1.3

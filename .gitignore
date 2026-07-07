@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large regenerable data (recreate with numerics/task2_asymmetric.py)
+numerics/task2_frontier_grid.csv
+
+# LaTeX build artifacts (if a PDF/tex is added later)
+*.aux
+*.log
+*.out
+*.synctex.gz

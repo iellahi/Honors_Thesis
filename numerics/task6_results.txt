@@ -1,0 +1,25 @@
+==========================================================================
+TASK 6 -- consolidated confirmation scan (seed 11, N=60000)
+==========================================================================
+converged asymmetric draws: 60000  (skipped: 0)
+
+claim                                         kind      checked   viol  key
+(1,1) interiority 0<x11*<=1                   T-cross     60000      0  100.000% ok
+(1,1) probability M x11*<1                    T-cross     60000      0  100.000% ok
+V11 < W/2                                     T-cross     60000      0  100.000% ok
+value ordering 0<=V01<=V11<=V10<=W            T-cross     60000      0  100.000% ok
+Prop 2: z*>x* at mu=lam                       T-cross     30000      0  0 fails
+z*>x* at mu!=lam (binding hyp.)               N           30000   6643  22.14% fail (~22%)
+Delta0 > 0                                    N           60000      0  min=2.1346e-02
+x00* in (0,1)                                 N           60000      0  0 viol
+m x00* < 1                                    N           60000      0  0 viol
+m x00* < 1-b0  (=> dx00*/dV10>0)              T-cross     60000      0  0 viol (unconditional)
+det J > 0                                     N           60000      0  0 viol
+provocation region N>0                        N           60000     47  99.92% (~99.8%)
+dx*/dbeta11 > 0                               N            4000      0  100.00% positive
+dz*/dbeta11 < 0 (ambiguous)                   N            4000    197  95.08% negative
+
+HARD violations of proven/theorem cross-checks: 0 (expect 0)
+HARD violations of (0,0) numerical claims (Delta0/x00/mx00) and det J: 0 (expect 0)
+
+NO violations recorded for any claim across the scan.

@@ -1,0 +1,34 @@
+==========================================================================
+PART A: closed form vs independent Bellman+FOC solves  (A2 region: lamW<=c)
+==========================================================================
+draws N = 60000   (seed 11, parity with verify_step5b)
+max |x_closed - x_bisect|          = 3.469e-14
+max |V_closed - V_bisect|          = 1.062e-11
+max |x_closed - x_BRiter| (n=3000) = 3.109e-14
+max |V_closed - V_BRiter| (n=3000) = 7.560e-12
+max |quadratic residual at x*|     = 7.887e-13
+interiority x* in (0,1] violations = 0   (expect 0 under A2)
+probability M x* < 1 violations    = 0   (expect 0 under A2)
+
+==========================================================================
+PART B: corner regime outside (A2)  (interior x- > 1  =>  corner x* = 1)
+==========================================================================
+reference lam=0.49, c=0.1, W=50.0, b11=0.0:  lamW=24.500 (>> c=0.1), x- = 4.0474  ->  corner x* = 1.0
+  (brief expected x- ~ 4.05; match = True)
+
+Interior x- at the (A2) boundary lamW=c (b11=0) -- A2 is sufficient, not tight:
+  lam=0.10: at lamW=c (W=1.000)  x- = 0.6592  (< 1  => interior still holds)
+  lam=0.25: at lamW=c (W=0.400)  x- = 0.6477  (< 1  => interior still holds)
+  lam=0.49: at lamW=c (W=0.204)  x- = 0.6285  (< 1  => interior still holds)
+
+True corner onset W (x-=1) vs (A2) boundary W=c/lam  (b11=0, c=0.1):
+  lam=0.10:  A2 boundary W=1.000   corner onset W=1.526   (lamW/c at onset = 1.526 > 1)
+  lam=0.25:  A2 boundary W=0.400   corner onset W=0.629   (lamW/c at onset = 1.571 > 1)
+  lam=0.40:  A2 boundary W=0.250   corner onset W=0.406   (lamW/c at onset = 1.625 > 1)
+  lam=0.49:  A2 boundary W=0.204   corner onset W=0.339   (lamW/c at onset = 1.662 > 1)
+
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/Honors_Thesis/numerical-validation/figs/corner_regime.png
+
+NOTE: the white x-=1 contour lies ABOVE the red lamW=c line -> (A2) is a
+      conservative sufficient condition; interior equilibria persist in the
+      band between the two boundaries before the corner binds.

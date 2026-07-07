@@ -1,0 +1,11 @@
+[beta11] x11*: 0.4867 -> 0.0075 (down);  x*: 0.1743 -> 0.2402 (up);  V11: 0.8129 -> 1.2468 (up)
+  monotone: x11* strictly down? True;  x* strictly up? True;  V11 strictly up? True
+figure: /sessions/beautiful-intelligent-goldberg/mnt/Honors_Thesis/figs/beta11_sweep.png
+[beta00] x00*: 0.2696 -> 0.0042;  P00: 0.0809 -> 0.0025;  V00: 0.7105 -> 0.9398
+  x00* monotone decreasing? True  (max P00=0.0809<1? True)
+figure: /sessions/beautiful-intelligent-goldberg/mnt/Honors_Thesis/figs/beta00_sweep.png
+[c-sweep]   V11: 0.8862 -> 0.9063 (+2.27%)  strictly up? True;  x11* down? True
+[lam-sweep] V11: 0.9090 -> 0.8778 (-3.43%)  strictly down? True;  x11* up? True
+figure: /sessions/beautiful-intelligent-goldberg/mnt/Honors_Thesis/figs/c_lambda_V11_sweep.png  (beta11=0.1 for visibility; monotone but modest)
+
+Referenced (already generated): figs/prop2_frontier.png (Task 2), figs/laggard_BR.png (Task 4)

@@ -1,0 +1,27 @@
+==========================================================================
+PART A: transmission d/dbeta11  (seed 11, N=40000)
+==========================================================================
+[a] dx*/dbeta11 > 0 : 40000/40000  = 100.000%  (laggard catch-up; expect ~100%)
+[b] dz*/dbeta11 sign: positive 1785, negative 38215  -> negative 95.54%  (memory ~96%)
+
+==========================================================================
+PART B: total vs direct effects for c and lam (V11 frozen = direct)  (subsample)
+==========================================================================
+subsample n = 8000   ([neg,pos] counts; flips = direct-vs-total sign disagreements)
+  dz_dc   : [neg,pos]=[8000, 0]   total-negative 100.00%   sign reversals vs direct: 0  (0.000%)
+  dx_dc   : [neg,pos]=[8000, 0]   total-negative 100.00%   sign reversals vs direct: 0  (0.000%)
+  dz_dlam : [neg,pos]=[1, 7999]   total-negative 0.01%   sign reversals vs direct: 1  (0.013%)
+  dx_dlam : [neg,pos]=[163, 7837]   total-negative 2.04%   sign reversals vs direct: 157  (1.962%)
+=> dx*/dlam is the one channel with sign reversals (indirect V11 effect flips the direct sign).
+
+==========================================================================
+PART C: laggard-BR slope region & det J  (seed 21, N=40000)
+==========================================================================
+equilibria in PROVOCATION region (N>0): 39938/40000 = 99.84%  (memory ~99.8%)
+equilibria in DISCOURAGEMENT region (N<=0): 62/40000 = 0.15%
+det J <= 0 violations: 0/40000  (regularity/uniqueness support; expect 0)
+
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/thesis/figs/dz_dbeta11_map.png
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/thesis/figs/dx_dlam_reversals.png   (slice reversal cells: 811/8100)
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/thesis/figs/laggard_BR.png
+  representative eq: z*=0.3117, x*=0.2333, margin N=0.0400 (>0 provocation)

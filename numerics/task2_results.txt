@@ -1,0 +1,31 @@
+==========================================================================
+PART A: asymmetric fixed point -- residuals, Prop 2, value ordering
+==========================================================================
+draws N = 60000  (half mu=lam, half mu!=lam; seed 11)
+max BR-quadratic residual |G_L|,|G_F|   = 9.548e-15   (tol 1e-9)
+  worst-residual params (lam,mu,b1,c,W) = (0.3293,0.4645,0.7304,9.9944,19.4374)
+
+[Prop 2] mu = lam : z* > x* fails 0 / 30000   (expect 0)
+[map]    mu != lam: z* > x* fails 6643 / 30000  = 22.14%   (memory: ~22%)
+value ordering 0<=V01<=V11<=V10<=W violations = 0
+interiority z,x in (0,1) violations           = 0
+probability lam z<1, mu x<1 violations        = 0
+
+==========================================================================
+PART B: where does z*>x* fail?  fraction failing, binned by mu/lam
+==========================================================================
+random draws N = 200000 (seed 101, mu!=lam)
+      mu/lam bin |        n |   z<=x %
+  [0, 0.5)     |    48031 |    0.00%
+  [0.5, 0.8)     |    31361 |    0.00%
+  [0.8, 1)     |    20937 |    0.00%
+  [1, 1.25)     |    21001 |    3.08%
+  [1.25, 1.6)     |    18034 |   20.64%
+  [1.6, 2)     |    12828 |   39.90%
+  [2, 3)     |    17214 |   56.31%
+  [3, inf)     |    30594 |   81.30%
+overall z*<=x* share (mu!=lam) = 22.03%
+=> the flip is driven by mu>lam (laggard's research rate exceeds the leader's
+   development rate): for mu<=lam, z*>x* holds ~always; it fails increasingly as mu/lam grows.
+
+figure written: /sessions/beautiful-intelligent-goldberg/mnt/thesis/figs/prop2_frontier.png
