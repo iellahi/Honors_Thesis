@@ -1,0 +1,45 @@
+==============================================================================
+PART 1/2: THEOREM cross-checks + NUMERICAL claims  (seed 202, N=60000, A1/A2/A2')
+==============================================================================
+
+THEOREM confirmation (numerical cross-check; 0 = all pass):
+  [     PASS]  Delta=(u-c)^2+8c^2 > 0   (violations 0/60000)
+  [     PASS]  Delta form matches 9c^2-2cu+u^2   (violations 0/60000)
+  [     PASS]  subtracted root: Mx<1   (violations 0/60000)
+  [     PASS]  additive root: Mx>1   (violations 0/60000)
+  [     PASS]  key inequality sqrt(Delta)>3c-u   (violations 0/60000)
+  [     PASS]  Prop 1 signs (x11: +,+,-,-)   (violations 0/60000)
+  [FAIL (221)]  Prop 1' signs (V11: +,+,+,-)   (violations 221/60000)
+  [     PASS]  value ordering 0<=V01<=V11<W/2<=V10<=W   (violations 0/60000)
+  [     PASS]  Prop 2 (z>x at mu=lam)   (violations 0/60000)
+  [     PASS]  BR slope sign = sign(N)   (violations 0/60000)
+  [FAIL (18)]  Prop 3 signs (x00: +,+,-)   (violations 18/60000)
+  [     PASS]  additive-root BRs solve G_L,G_F=0   (violations 0/60000)
+  min Delta over scan = 2.2873e-02   min Delta0 = 2.0283e-02
+  => ALL THEOREMS PASS: False
+
+NUMERICAL claims (in-region, fresh scan):
+  dx*/dbeta11 > 0            : 60000/60000 = 100.000%
+  dz*/dbeta11 negative       : 95.56%
+  dx*/dlam total-vs-direct reversals : 211/12000 = 1.758%
+  provocation region N>0     : 99.92% (of converged asym+sym)
+  Delta0>0 violations        : 0
+  x00* in (0,1) violations   : 0
+  m x00* < 1 violations      : 0
+  det J > 0 violations       : 0
+
+==============================================================================
+PART 3: BREAK REGIONS (relax one assumption at a time)
+==============================================================================
+(i) relax (A2) lamW>c: interior x11*>1 (corner) in 7921/40000 = 19.8% [in-region this is 0%]
+(ii) relax mu=lam: Prop 2 (z>x) FAILS in 8860/40000 = 22.1% [Prop 2 only claims mu=lam]
+(iii) relax (A2') muW>c (A2 kept): tested 60000 draws -> Delta0<=0: 0, x00 not in(0,1): 0, m x00>=1: 0
+     => (A2') appears NOT strictly needed for (0,0) interiority in this range
+
+==============================================================================
+PART 4: symbolic master-quadratic identity (sympy)
+==============================================================================
+  F00[terminal subs] - F11  simplifies to: 0
+  => master-quadratic identity holds: True
+
+[written] /sessions/beautiful-vibrant-bell/mnt/Honors_Thesis/numerics/task6_confirmation.txt

@@ -9,13 +9,13 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Large regenerable data (recreate with numerics/task2_asymmetric.py)
+# Large regenerable data
+# (recreate with numerics/task2_asymmetric.py and numerics/task7_transmission_scans.py)
 numerics/task2_frontier_grid.csv
+numerics/task7_sqrt2_grid.csv
 
 # LaTeX build artifacts (if a PDF/tex is added later)
 *.aux
 *.log
 *.out
 *.synctex.gz
-
-README_detailed.md

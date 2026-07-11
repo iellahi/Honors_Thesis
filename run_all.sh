@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate every figure and confirmation log from scratch (~40s total).
+# Regenerate every figure and confirmation log from scratch (a few minutes total).
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -12,6 +12,10 @@ scripts=(
   task6_summary
   task6_confirmation
   task6_diagnose_signs
+  verify_dx_dV11
+  task7_transmission_scans
+  task8_c_lambda_regen
+  task9_br_clean_fig
 )
 
 for s in "${scripts[@]}"; do
@@ -21,5 +25,10 @@ for s in "${scripts[@]}"; do
   python3 "numerics/${s}.py"
   echo
 done
+
+echo "======================================================================"
+echo "  running verify_scripts/verify_step8_transmission.py"
+echo "======================================================================"
+python3 "verify_scripts/verify_step8_transmission.py"
 
 echo "All scripts complete. Figures in figs/, logs and data in numerics/."

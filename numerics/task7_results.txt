@@ -1,0 +1,27 @@
+==========================================================================
+PART A: sqrt(2)-frontier (proven-transmission region) vs Prop-2 failures
+==========================================================================
+draws N = 60000 (seed 41, mu and lam independent)
+x* < sqrt2 z*  (proven dx*/dV11>0):        60000/60000 = 100.00%
+Prop-2 failures (z*<=x*):                  13176/60000 = 21.96%
+Prop-2 failures still inside sqrt2 region: 13176/13176 = 100.00%
+
+    mu/lam bin |       n |  z<=x % | of which x<sqrt2 z %
+  [0, 0.5)   |   14505 |   0.00% |                0.00%
+  [0.5, 0.8)   |    9372 |   0.00% |                0.00%
+  [0.8, 1)   |    6182 |   0.00% |                0.00%
+  [1, 1.25)   |    6198 |   3.23% |              100.00%
+  [1.25, 1.6)   |    5479 |  20.72% |              100.00%
+  [1.6, 2)   |    3883 |  38.81% |              100.00%
+  [2, 3)   |    5155 |  56.43% |              100.00%
+  [3, inf)   |    9226 |  80.48% |              100.00%
+
+grid (task2 config): max x*/(sqrt2 z*) = 0.8129 (< 1 everywhere: proven-transmission region covers the whole grid, incl. all 10364 Prop-2-failure cells)
+figure written: /sessions/beautiful-vibrant-bell/mnt/Honors_Thesis/figs/prop2_frontier_sqrt2_overlay.png
+
+==========================================================================
+PART C: sign(dz*/dbeta11) [FD, total] vs sign(R4 bracket)  seed 41, N=40000
+==========================================================================
+usable draws: 40000   sign matches: 40000   MISMATCHES: 0   near-zero flags: 0
+dz*/dbeta11 negative share: 95.48%  (memory: ~95.5%)
+figure written: /sessions/beautiful-vibrant-bell/mnt/Honors_Thesis/figs/dz_dbeta11_map_R4overlay.png

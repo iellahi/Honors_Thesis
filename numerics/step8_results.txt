@@ -1,0 +1,15 @@
+(I1) G_L,x|BR + c lam z^2/(2x): PASS (symbolic zero)
+(I2) G_F,z|BR + c x N/(2z(1-lam z)): PASS (symbolic zero)
+(R1) det J - c^2 * core: PASS (symbolic zero)
+(R1) core - positive-term decomposition: PASS (symbolic zero)
+(R2) num_x - target: PASS (symbolic zero)
+(R4) num_z - target: PASS (symbolic zero)
+
+Symbolic block: ALL PASS
+
+Numeric spot checks at solved equilibria: seed 8, N=20000, solved=20000
+  det J <= 0 violations:                    0/20000
+  num_x <= 0 with x* < sqrt2 z*:            0/20000
+  Cramer vs FD rel-err > 1e-3 (x, z):       0, 0 (max relerr 3.56e-08, 6.66e-06)
+  sign(dz*/dV11) != sign(R4 bracket):       0
+  near-zero FD flags skipped:               0
