@@ -1,0 +1,17 @@
+random scan (seed 43, N=60000): max x*/(sqrt2 z*) = 0.983367
+  argmax (lam,mu,b1,c,W) = (0.0120, 0.4793, 0.9789, 8.8777, 16.7188)
+adversarial corner sweep:      max x*/(sqrt2 z*) = 0.989437
+  argmax (lam,mu,b1,c,W-frac) = (0.01, 0.4999, 0.9995, 0.05, 0.05)
+limit probe: ratio x*/(sqrt2 z*) as (lam, 1-b1, Wfrac) -> 0, mu=0.4999, c=1.0
+  lam=1e-02 1-b1=1e-02: ratio=0.98784731
+  lam=1e-02 1-b1=1e-04: ratio=0.98950407
+  lam=1e-02 1-b1=1e-06: ratio=0.98952057
+  lam=1e-03 1-b1=1e-02: ratio=0.99726679
+  lam=1e-03 1-b1=1e-04: ratio=0.99892376
+  lam=1e-03 1-b1=1e-06: ratio=0.99894026
+  lam=1e-04 1-b1=1e-02: ratio=0.99822030
+  lam=1e-04 1-b1=1e-04: ratio=0.99987723
+  lam=1e-04 1-b1=1e-06: ratio=0.99989376
+  lam=1e-05 1-b1=1e-02: ratio=0.99831241
+  lam=1e-05 1-b1=1e-04: ratio=0.99997269
+  lam=1e-05 1-b1=1e-06: ratio=0.99998889

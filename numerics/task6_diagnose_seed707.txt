@@ -1,0 +1,17 @@
+Prop. 2 (V11 signs): float-flagged 230, HIGH-PRECISION real violations 0
+    (0.011, 0.4438, 9.2024, 2.3244, 0.527, 'float', (1, 1, 0, 1), 'hp', (1, 1, 1, -1))
+    (0.0253, 0.4912, 6.9788, 6.3572, 0.9843, 'float', (1, 1, 0, 1), 'hp', (1, 1, 1, -1))
+    (0.014, 0.014, 4.8686, 8.1948, 0.9729, 'float', (1, 1, 0, 1), 'hp', (1, 1, 1, -1))
+    (0.0112, 0.1842, 7.5659, 2.1877, 0.7358, 'float', (1, 1, 0, -1), 'hp', (1, 1, 1, -1))
+    (0.0294, 0.3692, 2.6149, 1.2228, 0.975, 'float', (1, 1, 0, -1), 'hp', (1, 1, 1, -1))
+    (0.0142, 0.3248, 4.0476, 1.6109, 0.9101, 'float', (1, 1, -1, -1), 'hp', (1, 1, 1, -1))
+Prop. 4  (x00 signs): float-flagged 6, HIGH-PRECISION real violations 0
+    (0.0277, 0.0277, 8.1419, 0.1146, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+    (0.1402, 0.0218, 9.8338, 0.0547, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+    (0.4537, 0.0237, 9.1465, 0.4449, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+    (0.2362, 0.0132, 3.4591, 0.2349, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+    (0.4497, 0.0103, 8.2223, 0.364, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+    (0.4492, 0.0126, 7.8945, 0.8203, 'float', (1, 0, -1), 'hp', (1, 1, -1))
+
+Interpretation: float flags with hp sign == 0 (or matching expected) are finite-difference
+artifacts where the true derivative is ~0 or below float resolution, NOT theorem violations.
