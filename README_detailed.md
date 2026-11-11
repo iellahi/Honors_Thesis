@@ -1,19 +1,17 @@
-# Numerical validation — detailed guide
+# Numerical validation: detailed guide
 
-The companion to [README.md](README.md). It walks through every result and every figure.
-You do not need to run anything to follow it; the scripts are here so that anyone can
-regenerate the whole thing with `bash run_all.sh`.
+The companion to [README.md](README.md). It explains the results and figures.
+Run `bash run_all.sh` to regenerate them.
 
 The thesis is a discrete-time, two-firm, two-stage innovation race with knowledge
-spillovers, solved as a Markov Perfect Equilibrium. This repo checks every closed form
-against an independent numerical solve of the Bellman and first-order-condition system,
-so the figures rest on the model rather than on the algebra being tested.
+spillovers, solved as a Markov Perfect Equilibrium. This repo checks the closed forms
+using symbolic and numerical methods, including an independent Bellman and
+first-order-condition solve for the `(1,1)` state.
 
-Full paper: `Ellahi_2026_Innovation_Race_Spillovers.pdf`. This is the reproducible side
+Full paper: [Paper PDF](Ellahi_2026_Innovation_Race_Spillovers.pdf). This is the reproducible side
 of its Section 5.
 
-Results are referred to by name and number — "leader dominance (Proposition 3)" — because
-numbers move between drafts and names do not.
+Results are referred to by name and number, such as "leader dominance (Proposition 3)."
 
 ---
 
@@ -45,18 +43,19 @@ two symmetric states. `u ≡ λ²W(1−β₁₁²)`. `D ≡ V₁₀ − V₀₁`
 
 ## Method
 
-The independent solver never uses the closed forms. It solves the Bellman equations and
-first-order conditions directly — bisection in the symmetric states, best-response
-iteration in the asymmetric ones, to an iteration tolerance of `1e-13`.
+The independent `(1,1)` solver uses bisection on the Bellman and first-order-condition
+system without using the closed form. The asymmetric-state solver iterates the derived
+best-response formulas to an iteration tolerance of `1e-13`. The initial-state solver
+evaluates the derived equilibrium quadratic.
 
 The checks come in three layers:
 
-1. **SymPy.** Every algebraic identity in the appendices — the master-quadratic
+1. SymPy: every algebraic identity in the appendices (the master-quadratic
    substitution, the best-response factorizations, the cross-partials, the Jacobian
-   determinant, the two Cramer numerators — must simplify to exact zero. No tolerance
+   determinant, the two Cramer numerators) must simplify to exact zero. No tolerance
    is involved.
-2. **Finite differences.** Comparative-statics signs are checked at solved equilibria.
-3. **mpmath at 50 digits.** A finite difference near zero cannot resolve a sign, so every
+2. Finite differences: comparative-statics signs are checked at solved equilibria.
+3. mpmath at 50 digits: a finite difference near zero cannot resolve a sign, so every
    flagged case is re-solved at high precision and decided there.
 
 Every claim in the thesis carries a status: proven, or numerical. The scans confirm the
@@ -70,8 +69,8 @@ support for the numerical ones.
 Two independent confirmation scans of 60,000 draws each (seeds 202 and 707), plus a third
 under seed 11, re-check every theorem and every numerical claim.
 
-**Within the maintained assumptions nothing breaks: every theorem passes and no numerical
-claim fails.**
+The saved scans report no violations within the maintained assumptions after the
+flagged finite differences are checked at higher precision.
 
 | | Result | Outcome |
 |---|---|---|
@@ -98,25 +97,23 @@ anticipated value of the tied state. Drawn at `c=1`, `λ=μ=0.3`, `W=2.5`.
 ### 2. How far the transmission theorem reaches
 ![sqrt(2) frontier overlay](figs/prop2_frontier_sqrt2_overlay.png)
 
-Transmission, `dx*/dV₁₁ > 0`, is a theorem whenever `x* < √2·z*` — a condition strictly
-weaker than leader dominance. The scans ask how much of the parameter space satisfies it.
-All of it: 60,000 out of 60,000 draws across the `μ ≠ λ` region, including all 13,176
-draws where leader dominance itself fails.
+Transmission, `dx*/dV₁₁ > 0`, is a theorem whenever `x* < √2·z*`, a condition strictly
+weaker than leader dominance. This condition holds in all 60,000 sampled draws across
+the `μ ≠ λ` region, including all 13,176 draws where leader dominance itself fails.
 
 On this grid the ratio `x*/(√2·z*)` peaks at 0.813, but an adversarial corner sweep pushes
 it to 0.9894 and a limit probe reaches 0.99999 as `λ → 0`, `β₁₁ → 1`, `μ → ½`, without ever
-attaining 1. So the hypothesis comes close to binding. That is a statement about the
-hypothesis, not the conclusion: √2 is where one of three terms in the transmission
-numerator changes sign, and the other two stay positive, so `dx*/dV₁₁ > 0` may well hold
-past it. The thesis therefore reports a conditional theorem plus a region-wide numerical
-check of the condition, rather than an unconditional claim.
+attaining 1. The sufficient condition comes close to binding: √2 is where one of three
+terms in the transmission numerator changes sign. The other two stay positive, so
+`dx*/dV₁₁ > 0` may hold past it. The thesis reports a conditional theorem and numerical
+checks of the condition across the maintained region.
 
 ### 3. Leader dominance and its frontier (Proposition 3)
 ![leader dominance frontier](figs/prop2_frontier.png)
 
 The leader out-invests the laggard, `z* > x*`, whenever `μ ≤ λ`. That is proven. It fails
 only above the diagonal: never for `μ ≤ λ`, 22% of `μ ≠ λ` draws overall, rising to 81%
-once `μ/λ ≥ 3`. **Every failure has `μ > λ`**, so the hypothesis is one-sided — only a
+once `μ/λ ≥ 3`. Every failure has `μ > λ`: only a
 laggard with a faster research technology than the leader's development technology can
 overturn the ordering.
 
@@ -133,10 +130,10 @@ in Section 4.2 of the thesis.
 ### 5. The leader's response has an exact sign boundary
 ![dz map with R4 overlay](figs/dz_dbeta11_map_R4overlay.png)
 
-The sign of `dz*/dβ₁₁` is ambiguous — negative in about 95.5% of draws — but its boundary
+The sign of `dz*/dβ₁₁` is ambiguous (negative in about 95.5% of draws), but its boundary
 is exact: the sign equals that of `λz³(1−λz)/2 − μ(1−λz)x³ − λzx²`. The black curve is that
-formula, not a fit, and it matches the numerical sign at all 40,000 scanned equilibria. The
-panel is one `(c, β₁₁, W)` slice; across the full region the positive share is 4.5%.
+formula, and it matches the numerical sign at all 40,000 scanned equilibria. The
+panel is one `(c, β₁₁, W)` slice; across the full scan the positive share is 4.5%.
 
 ### 6. Initial-stage spillovers
 ![beta00 sweep](figs/beta00_sweep.png)
@@ -151,8 +148,7 @@ That last observation is numerical, not proven.
 In discrete time `V₁₁` rises with `c` and falls with `λ`. The dependence is identically flat
 in the continuous-time model, so its existence and sign are the contribution; the magnitude
 is small, +2.3% and −3.4% over the sweep ranges. The figure uses `β₁₁ = 0.1` for visibility.
-It matters because it forces the direct-versus-total decomposition in the asymmetric states:
-when `c` or `λ` moves, incentives shift twice, once directly and once through `V₁₁`.
+When `c` or `λ` moves, asymmetric-state incentives change both directly and through `V₁₁`.
 
 <details>
 <summary><b>Supporting and diagnostic figures</b></summary>
@@ -161,7 +157,7 @@ when `c` or `λ` moves, incentives shift twice, once directly and once through `
   equilibrium is the corner `x* = 1`. (A2) is conservative: the true corner onset is at
   `λW/c ≈ 1.5–1.7`, not 1.
 - **`figs/task3_00_diagnostics.png`** — `Δ₀ > 0`, interior `x₀₀*`, and `mx₀₀* < 1−β₀₀`
-  everywhere. The last of these is what makes `∂x₀₀*/∂V₁₀ > 0` unconditional.
+  in all sampled draws. The last of these is what makes `∂x₀₀*/∂V₁₀ > 0` unconditional.
 - **`figs/dx_dlam_reversals.png`** — the indirect `V₁₁` channel flips the sign of `dx*/dλ`
   in a thin high-`λ`/low-`μ` wedge, about 2% of draws.
 - **`figs/c_lambda_V11_sweep_limitline.png`** — the same sweep with the rare-breakthrough
@@ -196,7 +192,7 @@ when `c` or `λ` moves, incentives shift twice, once directly and once through `
 
 ### Symbolic verification of the appendices
 
-`verify_scripts/` re-derives each appendix in SymPy and asserts the result. Every
+`verify_scripts/` re-derives each appendix in SymPy and checks the result. Every
 identity must come out exactly, so these scripts print PASS or FAIL per check rather
 than a tolerance. `run_all.sh` runs them in the order the appendices appear.
 
@@ -216,7 +212,7 @@ than a tolerance. `run_all.sh` runs them in the order the appendices appear.
 | `verify_step6.py` | D | `(0,0)` comparative statics (Proposition 4) |
 | `verify_step8_transmission.py` | C.5 | `det J`, the Cramer numerators, the leader sign bracket |
 
-`verify_step5b.py` is the reference full-system solver the scan scripts import from;
+`verify_step5b.py` is the reference full-system solver the scan scripts port their functions from;
 it is not a proof check, so `run_all.sh` does not call it directly.
 
 ---
@@ -247,19 +243,19 @@ exact symbolic zeros:
 Spot checks at 20,000 solved equilibria (seed 8): 0 violations, and Cramer against finite
 difference to a maximum relative error of 3.6×10⁻⁸ in `x` and 6.7×10⁻⁶ in `z`.
 
-**The sign flags, resolved.** Naive finite differences flag 239 cases on seed 202 — 221 of
-them on `∂V₁₁/∂c`, 18 on `∂x₀₀*/∂V₁₁` — and 236 on seed 707. Both slots have the same
+**The sign flags, resolved.** Naive finite differences flag 239 cases on seed 202 (221 on
+`∂V₁₁/∂c`, 18 on `∂x₀₀*/∂V₁₁`) and 236 on seed 707. Both checks have the same
 cause: `∂V₁₁/∂c` sits near its large-`c` saturation, where the true derivative drops below
 float resolution, and `∂x₀₀*/∂V₁₁ ∝ μ²` is tiny at very small `μ`. At 50 digits every
-flagged case recovers the proven sign. **0 real violations on either seed.**
+flagged case recovers the proven sign. There are 0 violations on either seed.
 
-**Break regions.** Relaxing each assumption one at a time shows they mark real boundaries.
+**Break regions.** The scans also relax each assumption one at a time.
 
 | Relaxation | What breaks | Frequency |
 |---|---|---|
 | (A2) `λW > c` | interior `x₁₁* > 1` → corner `x* = 1` | 19.8–20.0% of the tested band (0% in region) |
 | `μ ≤ λ` → `μ > λ` | leader dominance `z* > x*` | 22.1% of `μ ≠ λ` draws, all with `μ > λ` |
-| (A2′) `μW > c` | `(0,0)` interiority | 0 violations — the assumption buys the proofs, not the behaviour |
+| (A2′) `μW > c` | `(0,0)` interiority | 0 violations; the assumption is used in the proofs |
 
 **Still numerical.** `det J > 0`, uniqueness of the asymmetric fixed point, and the
 conditional `dx*/dV₁₁ > 0` are now theorems (Appendix C.5). What remains numerical: the
@@ -273,8 +269,7 @@ but does not prove stability.
 ## Reproduce
 
 Python 3.10+ and the packages in `requirements.txt` (`numpy`, `matplotlib`, `sympy`,
-`mpmath`). No SciPy: the independent solvers are hand-rolled bisection and value iteration,
-which is what makes them independent.
+`mpmath`). The solvers implement bisection and best-response iteration without SciPy.
 
 ```bash
 pip install -r requirements.txt

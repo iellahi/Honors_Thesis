@@ -1,29 +1,35 @@
-# Numerical validation — knowledge spillovers in a two-stage innovation race
+# Numerical Validation for my Honors Thesis
 
-This is the numerical side of my honors thesis (Section 5). Every closed form and
-every comparative-statics sign in the paper is checked here against an independent
-solve of the model.
+This repository is the numerical counterpart of my honors thesis: Trading Frontier
+Effort for Competitive Balance: Knowledge Spillovers in a Two-Stage Innovation Race.
+I check every closed form and comparative-static from my thesis using symbolic and numerical methods.
 
-## What "checked" means
+## Abstract
 
-The independent solver never touches the closed forms. It rebuilds the equilibrium
-from the Bellman equations and first-order conditions directly — bisection in the
-symmetric states, best-response iteration in the asymmetric ones. If the closed
-forms and the solver agree, the algebra in the paper is right.
+Rival firms racing to develop the same technology cannot fully contain what they
+learn. I ask how involuntary knowledge spillovers reshape a winner-take-all innovation
+race. I build a discrete-time dynamic contest in which two firms race through a
+Research Stage and a Development Stage, with spillovers active only between firms
+in the same stage. In the Markov Perfect Equilibrium, these spillovers work in two
+ways: firms at the frontier free-ride on a rival’s effort and invest less, while the value
+of reaching the frontier rises. Because spillovers are inactive when the race is asymmetric,
+the laggard responds only to that anticipated value, and so fights harder when
+there are higher spillovers at the frontier. I prove this transmission when the laggard’s
+research rate does not exceed the leader’s development rate, and verify it beyond that
+region against an independent numerical solution of the model. Spillovers therefore
+trade frontier effort against competitive balance.
 
-The checks come in three layers:
+[Paper PDF](Ellahi_2026_Innovation_Race_Spillovers.pdf)
 
-- **SymPy.** Every algebraic identity in the appendices is required to simplify to
-  exact zero. Those claims rest on no tolerance.
-- **Finite differences.** Comparative-statics signs are checked at solved equilibria.
-- **mpmath at 50 digits.** A finite difference near zero cannot resolve a sign, so
-  every flagged case is re-solved at high precision and decided there.
+## Independent Checks
 
-**Result: nothing breaks.** Closed forms match the independent solver to about
-1e-14. Every symbolic identity is exactly zero. Every proven sign holds. No
-numerical claim fails anywhere in the maintained parameter region, across three
-independent seeds. The finite-difference flags that did appear were all resolution
-artifacts and cleared at 50 digits.
+I check the `(1,1)` closed form against an independent Bellman and first-order-condition
+solve using bisection. The asymmetric states use iteration of the derived best-response
+formulas, and the initial state uses the derived equilibrium quadratic. All checks pass
+
+- SymPy. Every algebraic identity simplifies to zero
+- Finite differences. Comparative-statics checked at solved equilibria
+- mpmath (50 digits). Flagged cases re-solved at higher precision.
 
 ## The model
 
@@ -37,11 +43,11 @@ Both firms can break through in the same period, which sends the game straight f
 `(0,0)` to `(1,1)`. A tie at the finish is a coin flip. Winner takes `W`. Effort
 costs `c/2 · x²`.
 
-## The trade-off
+## Trade-off
 
 ![Frontier effort against competitive balance](figs/beta11_sweep.png)
 
-This is the result the paper is built on. As the development-stage spillover `β₁₁`
+As the development-stage spillover `β₁₁`
 rises, frontier effort `x₁₁*` falls — each firm free-rides on what spills over from
 the other. But the value of being tied at the frontier, `V₁₁`, rises, and so does
 the laggard's catch-up effort `x*`. Spillovers buy competitive balance and pay for
@@ -51,45 +57,31 @@ The laggard gets nothing from the leader directly. Spillovers are switched off w
 the race is asymmetric. It works harder only because the state it is racing toward
 is worth more.
 
-## How far the catch-up theorem reaches
+## Catch-up Theorem
 
 ![Margin to the sqrt(2) frontier](figs/prop2_frontier_sqrt2_overlay.png)
 
 The catch-up result `dx*/dV₁₁ > 0` is proven whenever the laggard's effort stays
-below √2 times the leader's. That condition is weaker than leader dominance, so the
-numerical question is how much of the parameter space satisfies it.
+below √2 times the leader's.
 
-All of it. 60,000 out of 60,000 draws, including all 13,176 draws where leader
-dominance itself fails. Pushing the parameters into their most extreme corner drives
-the ratio to 0.99 without crossing 1, so the condition comes close to binding.
-Whether the result survives past √2 is untested.
-
-## Leader dominance, and where it breaks (Proposition 3)
+## Leader Dominance
 
 ![Leader-dominance frontier](figs/prop2_frontier.png)
 
 The leader out-invests the laggard, `z* > x*`, whenever the laggard's research rate
-does not exceed the leader's development rate (`μ ≤ λ`). That is proven, and 0
-failures across the `μ ≤ λ` draws confirm it.
+does not exceed the leader's development rate (`μ ≤ λ`).
 
-It breaks once `μ` climbs above `λ`: about 22% of `μ ≠ λ` draws fail, and **every
-failure has `μ > λ`**. The failure share climbs with the ratio — 0% at the boundary,
-81% once `μ/λ ≥ 3`. The hypothesis is one-sided, and the numerics map exactly where
-it bites.
-
-## The laggard's best response is not monotone
+## Laggard's best response is not monotne.
 
 ![Laggard best response](figs/laggard_BR.png)
 
 Up to a threshold, a harder-working leader pushes the laggard to work harder rather
-than discouraging it. Past the threshold the laggard retreats. Equilibria sit on the
-first arm 99.8–99.9% of the time, so discouragement in this model shows up as a
-lower level of effort, not as a collapsing response.
+than discouraging it.
 
-## Everything else
+## Other
 
 - `(1,1)` closed form against an independent Bellman + FOC solve: agrees to ~1e-14
-- `(0,0)` state: `Δ₀ > 0` and `x₀₀* ∈ (0,1)` everywhere, minimum `Δ₀ ≈ 0.021`
+- `(0,0)` state: `Δ₀ > 0` and `x₀₀* ∈ (0,1)` in all sampled draws, minimum `Δ₀ ≈ 0.021`
 - laggard catch-up `dx*/dβ₁₁ > 0`: 100% of draws
 - `det J > 0`: proven analytically, and 0 violations numerically
 - the exact sign boundary for the leader's response `dz*/dβ₁₁` matches the numerics
@@ -104,14 +96,8 @@ pip install -r requirements.txt   # Python 3.10+
 bash run_all.sh                   # ~90 seconds
 ```
 
-Every scan uses a fixed seed and reports its sample size. Figures land in `figs/`,
+Scans use a fixed seed, report sample size. Figures in `figs/`,
 logs and tables in `numerics/`.
-
-## More
-
-- every figure and check, walked through, with the confirmation tables and caveats
-  → [README_detailed.md](README_detailed.md)
-- the thesis itself → `Ellahi_2026_Innovation_Race_Spillovers.pdf`
 
 ## Acknowledgement
 
